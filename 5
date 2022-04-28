@@ -1,0 +1,88 @@
+import keyboard as kb
+import random as rng
+import time
+c=0
+d=5
+t=0
+by=[]
+bx=[]
+bt=[]
+n=-1
+win=True
+s=['-','-','-','-','-','-','-','-','-','-']
+p=[['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-'],
+       ['-','-','-','-','-','-','-','-','-','-']]
+while win:  
+    p[9][d] = '@'
+    if n!=-1:
+        p[9][c]='-'
+    for e in range(0,len(bt)):
+        if bt[e]=='1':
+            for r1 in range(0,len(by)):
+                p[by(r1)][bx(r1)] = '*'
+        elif bt[e]=='2':
+            for r2 in range(0,len(by)):
+                p[by(r2)][bx(r2)] = '%'
+        elif bt[e]=='3':
+            for r3 in range(0,len(by)):
+                p[by(r3)][bx(r3)] = '#'
+            
+    
+    for s in p:
+        for k in s:
+            print(k,end='')
+        print()
+    b=rng.randint(1,3)
+    db=rng.randint(1,9)
+    if b==1:
+        p[0][db]='*'
+        by.append(0)
+        bx.append(db)
+        bt.append(b)
+    if b==2:
+        p[0][db]='%'
+        by.append(0)
+        bx.append(db)
+        bt.append(b)
+    if b==3:
+        p[0][db]='#'
+        by.append(0)
+        bx.append(db)
+        bt.append(b)
+    while True:
+        if kb.is_pressed('left')==True:
+            c=d
+            d=d-1
+            time.sleep(0.1)
+            if d==-1:
+                print('там нет места')
+                d=0
+            else:
+                n=n+1
+                break
+        elif kb.is_pressed('right')==True:
+            c=d
+            d=d+1
+            time.sleep(0.1)
+            if d==10:
+                print('там нет места')
+                d=9
+            else:
+                n=n+1
+                break
+    for y in by:
+        y=y+1
+    for i in range(0,len(by)):
+        if by[i]==9 and bx[i]==d:
+            win=False
+            print('вы проиграли')
+            break
+    print()
