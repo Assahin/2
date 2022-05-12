@@ -25,15 +25,13 @@ while win:
     if n!=-1:
         p[9][c]='-'
     for e in range(0,len(bt)):
-        if bt[e]=='1':
-            for r1 in range(0,len(by)):
-                p[by(r1)][bx(r1)] = '*'
-        elif bt[e]=='2':
-            for r2 in range(0,len(by)):
-                p[by(r2)][bx(r2)] = '%'
-        elif bt[e]=='3':
-            for r3 in range(0,len(by)):
-                p[by(r3)][bx(r3)] = '#'
+        if bt[e]==1:
+            p[by[e]][bx[e]] = '*'
+        elif bt[e]==2:
+            p[by[e]][bx[e]] = '%'
+        elif bt[e]==3:
+            p[by[e]][bx[e]] = '#'
+        p[by[e]-1][bx[e]] ='-'
             
     
     for s in p:
@@ -78,11 +76,17 @@ while win:
             else:
                 n=n+1
                 break
-    for y in by:
-        y=y+1
+    for i in range(len(by)):
+        by[i]=by[i]+1
+        
     for i in range(0,len(by)):
         if by[i]==9 and bx[i]==d:
             win=False
-            print('вы проиграли')
+            print('вы проиграли, ваш счёт =',n)
             break
+    if by[0]==10:
+        p[by[0]-1][bx[0]]='-'
+        del bx[0]
+        del by[0]
+        del bt[0]
     print()
